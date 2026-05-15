@@ -26,7 +26,8 @@ import {
   Activity,
   HeartPulse,
   Brain,
-  Zap
+  Zap,
+  Upload
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MEDICATIONS, MEDICAL_CONDITIONS, CONDITION_CONTRAINDICATIONS, Medication } from './data/medications';
@@ -88,6 +89,7 @@ export default function App() {
   const [interchangerTarget, setInterchangerTarget] = useState<string | null>(null);
   const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // --- Effects ---
   useEffect(() => {
@@ -128,8 +130,17 @@ export default function App() {
         videoRef.current.srcObject = stream;
       }
     } catch (err) {
-      console.error("Camera access denied", err);
-      alert("Please allow camera access to use this feature.");
+      console.error("Environment camera failed, trying default", err);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        setCameraStream(stream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (fallbackErr) {
+        console.error("Camera access denied", fallbackErr);
+        alert("Please allow camera access or use the Upload Photo option instead.");
+      }
     }
   };
 
@@ -140,18 +151,8 @@ export default function App() {
     }
   };
 
-  const captureAndScan = async () => {
-    if (!videoRef.current) return;
+  const processOCR = async (base64Image: string, isFromCamera: boolean = false) => {
     setIsScanning(true);
-    
-    const canvas = document.createElement('canvas');
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
-    const ctx = canvas.getContext('2d');
-    ctx?.drawImage(videoRef.current, 0, 0);
-    
-    const base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
-    
     try {
       const results = await scanPrescription(base64Image);
       const newMeds: ActiveMedication[] = [];
@@ -173,13 +174,44 @@ export default function App() {
       });
       
       setActiveMeds(prev => [...prev, ...newMeds]);
-      stopCamera();
+      if (isFromCamera) {
+        stopCamera();
+      }
       setActiveTab('results');
-    } catch (err) {
-      alert("Failed to scan prescription. Try manual entry.");
+    } catch (err: any) {
+      alert(err.message || "Failed to scan prescription. Try manual entry.");
     } finally {
       setIsScanning(false);
     }
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64String = (reader.result as string).split(',')[1];
+      await processOCR(base64String, false);
+    };
+    reader.readAsDataURL(file);
+    
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const captureAndScan = async () => {
+    if (!videoRef.current) return;
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(videoRef.current, 0, 0);
+    
+    const base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
+    await processOCR(base64Image, true);
   };
 
   // --- Logic ---
@@ -428,7 +460,7 @@ export default function App() {
                   <input 
                     type="number" 
                     value={patient.age}
-                    onChange={(e) => setPatient({...patient, age: parseInt(e.target.value) || 0})}
+                    onChange={(e) => setPatient({...patient, age: e.target.value === '' ? '' as any : parseInt(e.target.value) || 0})}
                     className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm focus:ring-2 ring-blue-500 outline-none"
                   />
                 </div>
@@ -492,6 +524,20 @@ export default function App() {
                     Clear All
                   </button>
                 )}
+                <input 
+                  type="file" 
+                  ref={fileInputRef} 
+                  onChange={handleFileUpload} 
+                  accept="image/*" 
+                  className="hidden" 
+                />
+                <button 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-500 transition-colors"
+                >
+                  <Upload size={14} />
+                  Upload Photo
+                </button>
                 <button 
                   onClick={() => {
                     if (cameraStream) stopCamera();

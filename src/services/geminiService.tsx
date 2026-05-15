@@ -5,7 +5,7 @@
 
 // Function to scan prescriptions using Groq API natively
 export async function scanPrescription(base64Image: string) {
-  const model = "llama-3.2-11b-vision-preview";
+  const model = "meta-llama/llama-4-scout-17b-16e-instruct";
   
   const prompt = `
     You are a highly specialized medical OCR system designed to extract medication details from prescriptions.
@@ -67,17 +67,31 @@ export async function scanPrescription(base64Image: string) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error("API Call Failed:", errorText);
-      throw new Error("Failed to process image with Groq.");
+      
+      let errorMessage = "Failed to process image with Groq.";
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.error?.message || errorText;
+      } catch(e) {}
+      
+      throw new Error(`Groq Error: ${errorMessage}`);
     }
 
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content || "[]";
     
-    // Clean potential markdown code blocks
-    const cleanedText = text.replace(/```json|```/g, "").trim();
-    return JSON.parse(cleanedText);
-  } catch (error) {
+    // Clean potential markdown and extract JSON array
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    const cleanedText = jsonMatch ? jsonMatch[0] : text.replace(/```json|```/g, "").trim();
+    
+    try {
+      return JSON.parse(cleanedText);
+    } catch (e) {
+      console.error("Failed to parse JSON from AI response:", cleanedText);
+      throw new Error("OCR could not confidently read the text. Please try taking a clearer photo or enter manually.");
+    }
+  } catch (error: any) {
     console.error("OCR Scan Error:", error);
-    throw new Error("Failed to scan prescription. Please try again or enter manually.");
+    throw new Error(error.message || "Failed to scan prescription. Please try again or enter manually.");
   }
 }
