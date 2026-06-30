@@ -110,6 +110,12 @@ export default function App() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    if (videoRef.current && cameraStream) {
+      videoRef.current.srcObject = cameraStream;
+    }
+  }, [cameraStream]);
+
   // --- Handlers ---
   const handleAddMed = (med: Medication, customName?: string) => {
     if (!activeMeds.find(m => m.id === med.id)) {
