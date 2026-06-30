@@ -6,6 +6,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+### 🔗 [View Live Deployment](https://ddi-clinic.vercel.app) | 🐙 [View GitHub Repository](https://github.com/Harshsharma-ui/ddi_clinic-app)
+
 > **An intelligent Clinical Decision Support System designed to catch potentially dangerous drug-drug interactions, analyze polypharmacy risks, and ensure patient safety in real-time.**
 
 ---
