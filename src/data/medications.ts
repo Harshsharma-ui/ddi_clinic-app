@@ -1724,6 +1724,306 @@ export const MEDICATIONS: Medication[] = [
     ],
     alternatives: ['cefixime', 'azithromycin']
   },
+  {
+    id: 'esomeprazole',
+    name: 'Esomeprazole (Nexium)',
+    genericName: 'Esomeprazole',
+    brands: ['Nexium', 'Esomac'],
+    category: 'Proton Pump Inhibitor',
+    properties: 'Reduces stomach acid secretion.',
+    usedFor: ['GERD', 'Acid reflux', 'Peptic ulcer'],
+    safeDose: '20mg - 40mg once daily.',
+    sideEffects: ['Headache', 'Diarrhea', 'Nausea', 'Dry mouth'],
+    overdoseEffects: 'Drowsiness, blurred vision, tachycardia, nausea.',
+    mechanismOfAction: 'Inhibits H+/K+ ATPase proton pump in gastric parietal cells.',
+    contraindications: ['Hypersensitivity to substituted benzimidazoles'],
+    interactions: [
+      { drugId: 'clopidogrel', severity: 'Major', description: 'Reduces the antiplatelet effect of clopidogrel.' },
+      { drugId: 'warfarin', severity: 'Moderate', description: 'May increase INR and bleeding risk.' }
+    ],
+    alternatives: ['omeprazole', 'pantoprazole']
+  },
+  {
+    id: 'clonazepam',
+    name: 'Clonazepam (Klonopin)',
+    genericName: 'Clonazepam',
+    brands: ['Klonopin', 'Clonefit'],
+    category: 'Benzodiazepine',
+    properties: 'Long-acting benzodiazepine for anxiety and seizures.',
+    usedFor: ['Anxiety', 'Panic disorder', 'Seizures'],
+    safeDose: '0.25mg - 2mg daily in divided doses.',
+    sideEffects: ['Drowsiness', 'Dizziness', 'Fatigue', 'Unsteadiness'],
+    overdoseEffects: 'Severe respiratory depression, confusion, coma.',
+    mechanismOfAction: 'Enhances GABA activity in the brain.',
+    contraindications: ['Severe liver disease', 'Acute narrow-angle glaucoma', 'Myasthenia gravis'],
+    interactions: [
+      { drugId: 'alcohol', severity: 'Major', description: 'Potentially fatal CNS and respiratory depression.' }
+    ],
+    alternatives: ['alprazolam', 'diazepam', 'lorazepam']
+  },
+  {
+    id: 'simvastatin',
+    name: 'Simvastatin (Zocor)',
+    genericName: 'Simvastatin',
+    brands: ['Zocor', 'Simvotin'],
+    category: 'Statin',
+    properties: 'Cholesterol-lowering medication.',
+    usedFor: ['Hypercholesterolemia', 'Cardiovascular risk reduction'],
+    safeDose: '10mg - 40mg once daily in the evening.',
+    sideEffects: ['Muscle pain', 'Headache', 'Nausea', 'Constipation'],
+    overdoseEffects: 'Severe muscle breakdown (rhabdomyolysis), liver toxicity.',
+    mechanismOfAction: 'HMG-CoA reductase inhibitor.',
+    contraindications: ['Active liver disease', 'Pregnancy', 'Breastfeeding'],
+    interactions: [
+      { drugId: 'amiodarone', severity: 'Major', description: 'Increases risk of myopathy and rhabdomyolysis.' },
+      { drugId: 'amlodipine', severity: 'Moderate', description: 'Amlodipine increases simvastatin levels.' },
+      { drugId: 'clarithromycin', severity: 'Major', description: 'Significantly increases risk of muscle damage.' },
+      { drugId: 'grapefruit_juice', severity: 'Moderate', description: 'Increases drug concentrations.' }
+    ],
+    alternatives: ['atorvastatin', 'rosuvastatin']
+  },
+  {
+    id: 'levofloxacin',
+    name: 'Levofloxacin (Levaquin)',
+    genericName: 'Levofloxacin',
+    brands: ['Levaquin', 'Loxof'],
+    category: 'Fluoroquinolone Antibiotic',
+    properties: 'Broad-spectrum fluoroquinolone.',
+    usedFor: ['Pneumonia', 'Sinusitis', 'UTI', 'Skin infections'],
+    safeDose: '250mg - 750mg once daily.',
+    sideEffects: ['Nausea', 'Diarrhea', 'Headache', 'Insomnia'],
+    overdoseEffects: 'QT prolongation, renal failure, seizures.',
+    mechanismOfAction: 'Inhibits DNA gyrase and topoisomerase IV, stopping bacterial replication.',
+    contraindications: ['History of tendon rupture', 'Hypersensitivity to quinolones'],
+    interactions: [
+      { drugId: 'warfarin', severity: 'Moderate', description: 'May increase bleeding risk.' },
+      { drugId: 'antacids', severity: 'Moderate', description: 'Reduces levofloxacin absorption.' }
+    ],
+    alternatives: ['ciprofloxacin', 'azithromycin']
+  },
+  {
+    id: 'apixaban',
+    name: 'Apixaban (Eliquis)',
+    genericName: 'Apixaban',
+    brands: ['Eliquis'],
+    category: 'Anticoagulant',
+    properties: 'Direct oral anticoagulant (DOAC).',
+    usedFor: ['Blood clot prevention', 'Atrial fibrillation', 'DVT/PE treatment'],
+    safeDose: '2.5mg - 5mg twice daily.',
+    sideEffects: ['Bleeding', 'Bruising', 'Nausea', 'Nosebleeds'],
+    overdoseEffects: 'Severe internal bleeding, hemorrhage.',
+    mechanismOfAction: 'Selective and reversible Factor Xa inhibitor.',
+    contraindications: ['Active pathological bleeding', 'Severe liver disease'],
+    interactions: [
+      { drugId: 'aspirin', severity: 'Major', description: 'Significantly increases risk of major bleeding.' },
+      { drugId: 'ibuprofen', severity: 'Major', description: 'High risk of GI and systemic bleeding.' },
+      { drugId: 'warfarin', severity: 'Major', description: 'Combined anticoagulants increase hemorrhage risk.' }
+    ],
+    alternatives: ['rivaroxaban', 'warfarin']
+  },
+  {
+    id: 'rivaroxaban',
+    name: 'Rivaroxaban (Xarelto)',
+    genericName: 'Rivaroxaban',
+    brands: ['Xarelto'],
+    category: 'Anticoagulant',
+    properties: 'Direct oral anticoagulant (DOAC).',
+    usedFor: ['Blood clot prevention', 'DVT/PE treatment', 'Atrial fibrillation'],
+    safeDose: '10mg - 20mg once daily with food.',
+    sideEffects: ['Bleeding', 'Bruising', 'Dizziness', 'Muscle pain'],
+    overdoseEffects: 'Hemorrhage, internal bleeding.',
+    mechanismOfAction: 'Selective Factor Xa inhibitor.',
+    contraindications: ['Active pathological bleeding', 'Moderate to severe hepatic impairment'],
+    interactions: [
+      { drugId: 'aspirin', severity: 'Major', description: 'Significantly increases bleeding risk.' },
+      { drugId: 'ibuprofen', severity: 'Major', description: 'High risk of GI irritation and bleeding.' },
+      { drugId: 'warfarin', severity: 'Major', description: 'Severe bleeding risk.' }
+    ],
+    alternatives: ['apixaban', 'warfarin']
+  },
+  {
+    id: 'pregabalin',
+    name: 'Pregabalin (Lyrica)',
+    genericName: 'Pregabalin',
+    brands: ['Lyrica', 'Pregab'],
+    category: 'Gabapentinoid',
+    properties: 'Relieves nerve pain and controls seizures.',
+    usedFor: ['Neuropathic pain', 'Fibromyalgia', 'Seizures', 'General anxiety disorder'],
+    safeDose: '75mg - 300mg twice daily.',
+    sideEffects: ['Dizziness', 'Drowsiness', 'Dry mouth', 'Weight gain', 'Edema'],
+    overdoseEffects: 'Somnolence, confusion, agitation, restlessness.',
+    mechanismOfAction: 'Binds to the alpha-2-delta subunit of voltage-gated calcium channels.',
+    contraindications: ['Hypersensitivity'],
+    interactions: [
+      { drugId: 'alcohol', severity: 'Moderate', description: 'Increased drowsiness and dizziness.' }
+    ],
+    alternatives: ['gabapentin', 'amitriptyline']
+  },
+  {
+    id: 'fluconazole',
+    name: 'Fluconazole (Diflucan)',
+    genericName: 'Fluconazole',
+    brands: ['Diflucan', 'Forcan'],
+    category: 'Antifungal',
+    properties: 'Triazole antifungal agent.',
+    usedFor: ['Vaginal yeast infection', 'Oral thrush', 'Systemic candidiasis'],
+    safeDose: '50mg - 400mg once daily.',
+    sideEffects: ['Nausea', 'Abdominal pain', 'Headache', 'Rash'],
+    overdoseEffects: 'Hallucinations, paranoid behavior, QT prolongation.',
+    mechanismOfAction: 'Inhibits fungal cytochrome P450-mediated synthesis of ergosterol.',
+    contraindications: ['Hypersensitivity', 'Concomitant use of QT-prolonging drugs'],
+    interactions: [
+      { drugId: 'warfarin', severity: 'Major', description: 'Increases warfarin concentration, major bleeding risk.' },
+      { drugId: 'simvastatin', severity: 'Major', description: 'Increases risk of statin-induced muscle damage.' }
+    ],
+    alternatives: ['ketoconazole']
+  },
+  {
+    id: 'dapagliflozin',
+    name: 'Dapagliflozin (Farxiga)',
+    genericName: 'Dapagliflozin',
+    brands: ['Farxiga', 'Forxiga'],
+    category: 'SGLT2 Inhibitor',
+    properties: 'Reduces blood sugar by prompting kidneys to excrete glucose.',
+    usedFor: ['Type 2 Diabetes', 'Heart failure', 'Chronic kidney disease'],
+    safeDose: '5mg - 10mg once daily.',
+    sideEffects: ['Genital yeast infections', 'UTIs', 'Dehydration', 'Increased urination'],
+    overdoseEffects: 'Hypoglycemia, severe dehydration.',
+    mechanismOfAction: 'Inhibits sodium-glucose cotransporter 2 (SGLT2) in proximal renal tubules.',
+    contraindications: ['Severe renal impairment (eGFR < 30) for glycemic control'],
+    interactions: [
+      { drugId: 'furosemide', severity: 'Moderate', description: 'May increase the risk of dehydration and hypotension.' }
+    ],
+    alternatives: ['empagliflozin']
+  },
+  {
+    id: 'glimepiride',
+    name: 'Glimepiride (Amaryl)',
+    genericName: 'Glimepiride',
+    brands: ['Amaryl', 'Glimy'],
+    category: 'Sulfonylurea',
+    properties: 'Oral blood-sugar-lowering drug.',
+    usedFor: ['Type 2 Diabetes'],
+    safeDose: '1mg - 8mg once daily with breakfast.',
+    sideEffects: ['Hypoglycemia', 'Weight gain', 'Nausea', 'Headache'],
+    overdoseEffects: 'Severe, prolonged hypoglycemia.',
+    mechanismOfAction: 'Stimulates insulin release from functioning pancreatic beta cells.',
+    contraindications: ['Type 1 Diabetes', 'Diabetic ketoacidosis', 'Severe hepatic or renal impairment'],
+    interactions: [
+      { drugId: 'alcohol', severity: 'Moderate', description: 'Increased risk of hypoglycemia and disulfiram-like reaction.' }
+    ],
+    alternatives: ['glipizide', 'metformin']
+  },
+  {
+    id: 'duloxetine',
+    name: 'Duloxetine (Cymbalta)',
+    genericName: 'Duloxetine',
+    brands: ['Cymbalta', 'Duzela'],
+    category: 'SNRI',
+    properties: 'Serotonin-norepinephrine reuptake inhibitor.',
+    usedFor: ['Depression', 'Generalized anxiety disorder', 'Diabetic neuropathy', 'Fibromyalgia'],
+    safeDose: '30mg - 60mg once daily.',
+    sideEffects: ['Nausea', 'Dry mouth', 'Sleepiness', 'Sweating', 'Loss of appetite'],
+    overdoseEffects: 'Serotonin syndrome, seizures, extreme drowsiness, tachycardia.',
+    mechanismOfAction: 'Inhibits neuronal uptake of serotonin and norepinephrine in the CNS.',
+    contraindications: ['Uncontrolled narrow-angle glaucoma', 'Concomitant use of MAOIs', 'Severe renal or liver impairment'],
+    interactions: [
+      { drugId: 'aspirin', severity: 'Moderate', description: 'May increase bleeding risk.' },
+      { drugId: 'tramadol', severity: 'Major', description: 'High risk of serotonin syndrome and seizures.' }
+    ],
+    alternatives: ['sertraline', 'amitriptyline', 'pregabalin']
+  },
+  {
+    id: 'hydrochlorothiazide',
+    name: 'Hydrochlorothiazide (Microzide)',
+    genericName: 'Hydrochlorothiazide',
+    brands: ['Microzide', 'Aquazide'],
+    category: 'Thiazide Diuretic',
+    properties: 'Diuretic and antihypertensive.',
+    usedFor: ['Hypertension', 'Edema'],
+    safeDose: '12.5mg - 50mg once daily.',
+    sideEffects: ['Hypokalemia', 'Dehydration', 'Dizziness', 'Hyperuricemia'],
+    overdoseEffects: 'Electrolyte depletion, severe dehydration, hypotension.',
+    mechanismOfAction: 'Inhibits sodium reabsorption in the distal convoluted tubules.',
+    contraindications: ['Anuria', 'Sulfonamide hypersensitivity'],
+    interactions: [
+      { drugId: 'aspirin', severity: 'Moderate', description: 'NSAIDs may reduce the diuretic and antihypertensive effects.' },
+      { drugId: 'lisinopril', severity: 'Moderate', description: 'Increased risk of hypotension.' }
+    ],
+    alternatives: ['furosemide', 'spironolactone']
+  },
+  {
+    id: 'tizanidine',
+    name: 'Tizanidine (Zanaflex)',
+    genericName: 'Tizanidine',
+    brands: ['Zanaflex', 'Tizan'],
+    category: 'Muscle Relaxant',
+    properties: 'Short-acting skeletal muscle relaxant.',
+    usedFor: ['Muscle spasticity', 'Back pain', 'Neck pain'],
+    safeDose: '2mg - 8mg every 6-8 hours. Max 36mg/day.',
+    sideEffects: ['Dry mouth', 'Drowsiness', 'Dizziness', 'Low blood pressure'],
+    overdoseEffects: 'Severe hypotension, bradycardia, somnolence, respiratory depression.',
+    mechanismOfAction: 'Alpha-2 adrenergic receptor agonist in the spinal cord, reducing spasticity.',
+    contraindications: ['Concomitant use of potent CYP1A2 inhibitors (like ciprofloxacin)'],
+    interactions: [
+      { drugId: 'ciprofloxacin', severity: 'Major', description: 'Ciprofloxacin significantly increases tizanidine levels, causing severe hypotension.' }
+    ],
+    alternatives: ['baclofen', 'gabapentin']
+  },
+  {
+    id: 'salmeterol',
+    name: 'Salmeterol (Serevent)',
+    genericName: 'Salmeterol',
+    brands: ['Serevent'],
+    category: 'LABA (Bronchodilator)',
+    properties: 'Long-acting bronchodilator for respiratory conditions.',
+    usedFor: ['Asthma prevention', 'COPD maintenance'],
+    safeDose: '50mcg twice daily (inhalation).',
+    sideEffects: ['Headache', 'Tremor', 'Nervousness', 'Throat irritation'],
+    overdoseEffects: 'Tachycardia, hypokalemia, muscle tremors, cardiac arrhythmias.',
+    mechanismOfAction: 'Selective beta-2 adrenergic agonist with a long duration of action.',
+    contraindications: ['Monotherapy for asthma (must be used with ICS)', 'Hypersensitivity'],
+    interactions: [
+      { drugId: 'metoprolol', severity: 'Major', description: 'Beta-blockers can cause bronchospasm and reduce effectiveness.' }
+    ],
+    alternatives: ['salbutamol']
+  },
+  {
+    id: 'ipratropium',
+    name: 'Ipratropium (Atrovent)',
+    genericName: 'Ipratropium Bromide',
+    brands: ['Atrovent', 'Iprazest'],
+    category: 'Anticholinergic Bronchodilator',
+    properties: 'Relieves bronchospasm by blocking acetylcholine receptors.',
+    usedFor: ['COPD', 'Asthma exacerbation'],
+    safeDose: '2-4 puffs 4 times daily (inhalation).',
+    sideEffects: ['Dry mouth', 'Cough', 'Headache', 'Nasal dryness'],
+    overdoseEffects: 'Anticholinergic symptoms (blurred vision, dry mouth, urinary retention).',
+    mechanismOfAction: 'Antagonizes acetylcholine receptors in bronchial smooth muscle, causing bronchodilation.',
+    contraindications: ['Hypersensitivity to atropine or ipratropium'],
+    interactions: [],
+    alternatives: ['salbutamol', 'tiotropium']
+  },
+  {
+    id: 'ketoconazole',
+    name: 'Ketoconazole (Nizoral)',
+    genericName: 'Ketoconazole',
+    brands: ['Nizoral', 'Ketocip'],
+    category: 'Antifungal',
+    properties: 'Broad-spectrum antifungal agent.',
+    usedFor: ['Fungal skin infections', 'Dandruff', 'Systemic fungal infections'],
+    safeDose: '200mg - 400mg once daily.',
+    sideEffects: ['Nausea', 'Abdominal pain', 'Itching', 'Liver damage (rare but severe)'],
+    overdoseEffects: 'Hepatotoxicity, severe GI distress.',
+    mechanismOfAction: 'Inhibits fungal cell membrane synthesis by blocking ergosterol production.',
+    contraindications: ['Active or chronic liver disease', 'Concomitant use of QT-prolonging drugs'],
+    interactions: [
+      { drugId: 'domperidone', severity: 'Major', description: 'Increases domperidone levels and risk of severe QT prolongation.' },
+      { drugId: 'atorvastatin', severity: 'Major', description: 'Increases statin concentrations, raising risk of muscle breakdown.' },
+      { drugId: 'simvastatin', severity: 'Major', description: 'Significantly increases risk of statin toxicity.' }
+    ],
+    alternatives: ['fluconazole']
+  }
 ];
 
 export const MEDICAL_CONDITIONS = [
@@ -1745,24 +2045,36 @@ export const MEDICAL_CONDITIONS = [
   { id: 'gout', label: 'Gout', severity: 'Medium' },
   { id: 'bph', label: 'Enlarged Prostate (BPH)', severity: 'Low' },
   { id: 'depression', label: 'Depression', severity: 'Medium' },
-  { id: 'anxiety', label: 'Anxiety', severity: 'Medium' }
+  { id: 'anxiety', label: 'Anxiety', severity: 'Medium' },
+  { id: 'copd', label: 'Chronic Obstructive Pulmonary Disease', severity: 'High' },
+  { id: 'epilepsy', label: 'Epilepsy / Seizure Disorder', severity: 'High' },
+  { id: 'parkinsons', label: 'Parkinson\'s Disease', severity: 'Medium' },
+  { id: 'hyperthyroidism', label: 'Hyperthyroidism', severity: 'Medium' },
+  { id: 'g6pd_deficiency', label: 'G6PD Deficiency', severity: 'High' },
+  { id: 'cad', label: 'Coronary Artery Disease', severity: 'High' }
 ];
 
 export const CONDITION_CONTRAINDICATIONS: Record<string, string[]> = {
-  'ckd': ['ibuprofen', 'metformin', 'spironolactone', 'furosemide', 'diclofenac', 'naproxen', 'empagliflozin', 'enalapril', 'lisinopril'],
-  'liver_cirrhosis': ['paracetamol', 'atorvastatin', 'warfarin', 'amoxicillin', 'diclofenac', 'rosuvastatin', 'carvedilol', 'amiodarone', 'valsartan'],
-  'pregnancy': ['lisinopril', 'losartan', 'atorvastatin', 'warfarin', 'aspirin', 'telmisartan', 'valsartan', 'enalapril', 'doxycycline', 'metronidazole', 'fluoxetine', 'sertraline'],
-  'stroke': ['ibuprofen', 'aspirin', 'diclofenac', 'naproxen', 'sildenafil', 'tadalafil'],
-  'brain_hemorrhage': ['warfarin', 'aspirin', 'clopidogrel', 'diclofenac', 'naproxen', 'sildenafil', 'tadalafil'],
+  'ckd': ['ibuprofen', 'metformin', 'spironolactone', 'furosemide', 'diclofenac', 'naproxen', 'empagliflozin', 'enalapril', 'lisinopril', 'dapagliflozin'],
+  'liver_cirrhosis': ['paracetamol', 'atorvastatin', 'warfarin', 'amoxicillin', 'diclofenac', 'rosuvastatin', 'carvedilol', 'amiodarone', 'valsartan', 'simvastatin', 'ketoconazole', 'apixaban', 'rivaroxaban'],
+  'pregnancy': ['lisinopril', 'losartan', 'atorvastatin', 'warfarin', 'aspirin', 'telmisartan', 'valsartan', 'enalapril', 'doxycycline', 'metronidazole', 'fluoxetine', 'sertraline', 'simvastatin', 'duloxetine', 'clonazepam'],
+  'stroke': ['ibuprofen', 'aspirin', 'diclofenac', 'naproxen', 'sildenafil', 'tadalafil', 'apixaban', 'rivaroxaban'],
+  'brain_hemorrhage': ['warfarin', 'aspirin', 'clopidogrel', 'diclofenac', 'naproxen', 'sildenafil', 'tadalafil', 'apixaban', 'rivaroxaban'],
   'hypertension': ['ibuprofen', 'diclofenac', 'naproxen', 'prednisone', 'dexamethasone', 'pseudoephedrine'],
   'diabetes_t2': ['furosemide', 'prednisone', 'dexamethasone', 'metoprolol', 'atenolol'],
   'diabetes_t1': ['furosemide', 'prednisone', 'dexamethasone', 'metoprolol', 'atenolol'],
   'heart_failure': ['ibuprofen', 'diclofenac', 'naproxen', 'pioglitazone', 'spironolactone', 'verapamil', 'amlodipine'],
-  'peptic_ulcer': ['aspirin', 'ibuprofen', 'warfarin', 'clopidogrel', 'diclofenac', 'naproxen', 'prednisone', 'dexamethasone'],
-  'asthma': ['aspirin', 'ibuprofen', 'diclofenac', 'naproxen', 'metoprolol', 'atenolol', 'bisoprolol', 'carvedilol'],
-  'glaucoma': ['amitriptyline', 'alprazolam', 'diazepam', 'lorazepam', 'fluoxetine', 'sertraline'],
+  'peptic_ulcer': ['aspirin', 'ibuprofen', 'warfarin', 'clopidogrel', 'diclofenac', 'naproxen', 'prednisone', 'dexamethasone', 'esomeprazole'],
+  'asthma': ['aspirin', 'ibuprofen', 'diclofenac', 'naproxen', 'metoprolol', 'atenolol', 'bisoprolol', 'carvedilol', 'salmeterol'],
+  'glaucoma': ['amitriptyline', 'alprazolam', 'diazepam', 'lorazepam', 'fluoxetine', 'sertraline', 'clonazepam', 'duloxetine'],
   'gout': ['aspirin', 'furosemide', 'hydrochlorothiazide', 'niacin'],
   'atrial_fibrillation': ['ibuprofen', 'diclofenac', 'naproxen', 'sildenafil', 'tadalafil'],
   'bph': ['amitriptyline', 'diazepam', 'diphenhydramine', 'pseudoephedrine'],
-  'depression': ['tramadol', 'morphine', 'alprazolam', 'diazepam', 'lorazepam']
+  'depression': ['tramadol', 'morphine', 'alprazolam', 'diazepam', 'lorazepam'],
+  'copd': ['metoprolol', 'atenolol', 'bisoprolol', 'carvedilol'],
+  'epilepsy': ['tramadol', 'amitriptyline'],
+  'parkinsons': ['metoclopramide', 'stemetil'],
+  'hyperthyroidism': ['amiodarone', 'salbutamol', 'salmeterol'],
+  'g6pd_deficiency': ['aspirin', 'ciprofloxacin', 'levofloxacin'],
+  'cad': ['ibuprofen', 'diclofenac', 'naproxen', 'zerodol_p', 'combiflam', 'meftal_p', 'sildenafil', 'tadalafil']
 };
