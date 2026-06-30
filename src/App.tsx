@@ -204,13 +204,22 @@ export default function App() {
   const captureAndScan = async () => {
     if (!videoRef.current) return;
     
+    let width = videoRef.current.videoWidth;
+    let height = videoRef.current.videoHeight;
+    const MAX_WIDTH = 1024;
+
+    if (width > MAX_WIDTH) {
+      height = Math.round((height * MAX_WIDTH) / width);
+      width = MAX_WIDTH;
+    }
+
     const canvas = document.createElement('canvas');
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext('2d');
-    ctx?.drawImage(videoRef.current, 0, 0);
+    ctx?.drawImage(videoRef.current, 0, 0, width, height);
     
-    const base64Image = canvas.toDataURL('image/jpeg');
+    const base64Image = canvas.toDataURL('image/jpeg', 0.7);
     await processOCR(base64Image, true);
   };
 
