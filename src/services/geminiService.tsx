@@ -5,7 +5,7 @@
 
 // Function to scan prescriptions using Groq API natively
 export async function scanPrescription(base64Image: string) {
-  const model = "meta-llama/llama-4-scout-17b-16e-instruct";
+  const model = "llama-3.2-90b-vision-preview";
   
   const prompt = `
     You are a highly specialized medical OCR system designed to extract medication details from prescriptions.
@@ -56,7 +56,7 @@ export async function scanPrescription(base64Image: string) {
             role: "user",
             content: [
               { type: "text", text: prompt },
-              { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64Image}` } }
+              { type: "image_url", image_url: { url: base64Image } }
             ]
           }
         ],

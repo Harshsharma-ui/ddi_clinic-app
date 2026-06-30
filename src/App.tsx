@@ -191,7 +191,7 @@ export default function App() {
 
     const reader = new FileReader();
     reader.onloadend = async () => {
-      const base64String = (reader.result as string).split(',')[1];
+      const base64String = (reader.result as string);
       await processOCR(base64String, false);
     };
     reader.readAsDataURL(file);
@@ -210,7 +210,7 @@ export default function App() {
     const ctx = canvas.getContext('2d');
     ctx?.drawImage(videoRef.current, 0, 0);
     
-    const base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
+    const base64Image = canvas.toDataURL('image/jpeg');
     await processOCR(base64Image, true);
   };
 
