@@ -67,7 +67,6 @@ interface ConditionConflict {
 
 // --- Main Component ---
 export default function App() {
-  console.log("App started"); 
   const [darkMode, setDarkMode] = useState(() => {
   if (typeof window !== "undefined") {
     const saved = localStorage.getItem('darkMode');
@@ -334,11 +333,6 @@ export default function App() {
   const safetyScore = calculateSafetyScore();
   const interactions = getInteractions();
   const conflicts = getConditionConflicts();
-
-  // Debugging safety score
-  useEffect(() => {
-    console.log("Safety Score Updated:", safetyScore, { interactions, conflicts });
-  }, [safetyScore, interactions.length, conflicts.length]);
 
   // --- Render Helpers ---
   const filteredDrugs = searchQuery.length > 0 

@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "ddi-clinical-decision-support-system",
+  "description": "Clinical Decision Support System with OCR and AI",
   "private": true,
   "version": "0.0.0",
   "type": "module",
