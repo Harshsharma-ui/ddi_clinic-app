@@ -5,8 +5,6 @@
 
 // Function to scan prescriptions using Groq API natively
 export async function scanPrescription(base64Image: string) {
-  const model = "meta-llama/llama-4-scout-17b-16e-instruct";
-  
   const prompt = `
     You are a highly specialized medical OCR system designed to extract medication details from prescriptions.
     The input image may be a handwritten or printed prescription, often with messy handwriting or medical abbreviations.
@@ -35,32 +33,42 @@ export async function scanPrescription(base64Image: string) {
   `;
 
   try {
-    // Check for Groq API Key, or fallback if testing
-    const apiKey = import.meta.env.VITE_GROQ_API_KEY || (typeof process !== 'undefined' && process.env.GROQ_API_KEY) || import.meta.env.VITE_GEMINI_API_KEY;
+    // We prioritize VITE_GEMINI_API_KEY since Groq deprecated their vision models
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' && process.env.GEMINI_API_KEY);
     
     if (!apiKey) {
-      console.warn("Groq API key missing. A VITE_GROQ_API_KEY is required for analysis.");
-      throw new Error("API key is missing. Please add VITE_GROQ_API_KEY to your Vercel Environment Variables.");
+      console.warn("Gemini API key missing. A VITE_GEMINI_API_KEY is required for analysis.");
+      throw new Error("API key is missing. Please add VITE_GEMINI_API_KEY to your Vercel Environment Variables.");
     }
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    // Extract raw base64 and mime type if prefixed
+    const match = base64Image.match(/^data:(image\/[a-zA-Z]*);base64,(.*)$/);
+    const mimeType = match ? match[1] : "image/jpeg";
+    const rawBase64 = match ? match[2] : base64Image;
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: model,
-        messages: [
+        contents: [
           {
-            role: "user",
-            content: [
-              { type: "text", text: prompt },
-              { type: "image_url", image_url: { url: base64Image } }
+            parts: [
+              { text: prompt },
+              {
+                inline_data: {
+                  mime_type: mimeType,
+                  data: rawBase64
+                }
+              }
             ]
           }
         ],
-        temperature: 0.1
+        generationConfig: {
+          temperature: 0.1,
+          responseMimeType: "application/json"
+        }
       })
     });
 
@@ -68,17 +76,17 @@ export async function scanPrescription(base64Image: string) {
       const errorText = await response.text();
       console.error("API Call Failed:", errorText);
       
-      let errorMessage = "Failed to process image with Groq.";
+      let errorMessage = "Failed to process image with Gemini.";
       try {
         const errorJson = JSON.parse(errorText);
         errorMessage = errorJson.error?.message || errorText;
       } catch(e) {}
       
-      throw new Error(`Groq Error: ${errorMessage}`);
+      throw new Error(`Gemini Error: ${errorMessage}`);
     }
 
     const data = await response.json();
-    const text = data.choices?.[0]?.message?.content || "[]";
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
     
     // Clean potential markdown and extract JSON array
     const jsonMatch = text.match(/\[[\s\S]*\]/);
